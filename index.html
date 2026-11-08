@@ -26,9 +26,7 @@ h1{font-size:33px;line-height:1.35;margin-bottom:14px;letter-spacing:.5px}
 .progress{height:10px;background:#ffe3ea;border-radius:99px;overflow:hidden;margin-bottom:10px}
 .progress i{display:block;height:100%;background:linear-gradient(90deg,#ff8fab,#e8436b);border-radius:99px;transition:width .35s ease}
 .qcount{color:#c2748a;font-size:13px;font-weight:600;letter-spacing:1.5px;margin-bottom:14px}
-.qtext{font-size:21px;font-weight:700;line-height:1.55;margin-bottom:8px}
-.qhint{color:#c2748a;font-size:13.5px;margin-bottom:20px}
-.opt.picked2{background:#fff7e8;border-color:#e8a33d;color:#7a4a12;font-weight:600}
+.qtext{font-size:21px;font-weight:700;line-height:1.55;margin-bottom:22px}
 .opt{display:block;width:100%;text-align:left;background:#fff9fa;border:1.5px solid #f3d7de;color:#46323a;font-size:16px;line-height:1.55;padding:15px 17px;border-radius:18px;margin-bottom:11px;cursor:pointer;animation:fadeUp .35s ease both;transition:background .15s ease,border-color .15s ease}
 .opt:active,.opt.picked{background:linear-gradient(120deg,#ffeef2,#ffe0e8);border-color:#e8436b;color:#8c1d3f;font-weight:600;box-shadow:0 8px 20px rgba(232,67,107,.16)}
 .back{background:none;border:none;color:#b0838e;font-size:14px;cursor:pointer;padding:8px 0}
@@ -57,17 +55,16 @@ h1{font-size:33px;line-height:1.35;margin-bottom:14px;letter-spacing:.5px}
     <div class="hero">💌</div>
     <span class="badge">趣味测试 · 12 道题</span>
     <h1>你在恋爱里，<br>是<span class="grad">哪种人</span>？</h1>
-    <p class="sub">12 道恋爱情境题，每题选两个——最像你的 + 第二像你的，再也不用纠结只能选一个。3 分钟测出你的恋爱类型：热烈直球、心思细腻、慢热深情、理性克制、自由独立、默默守护——哪一个才是恋爱里的你？</p>
+    <p class="sub">12 道恋爱情境题，3 分钟测出你的恋爱类型：热烈直球、心思细腻、慢热深情、理性克制、自由独立、默默守护——哪一个才是恋爱里的你？</p>
     <div class="meta"><span>⏱ 约 3 分钟</span><span>💌 6 种结果</span><span>📸 结果可截图分享</span></div>
     <button class="btn" id="btnStart">开始测试</button>
-    <p class="disc">凭直觉选：先点最像你的，再点第二像你的，两个都点完自动下一题。<br>本测试为趣味娱乐，非专业心理测评，仅供自我探索参考。</p>
+    <p class="disc">凭直觉选，别想太多，第一个念头通常最准。<br>本测试为趣味娱乐，非专业心理测评，仅供自我探索参考。</p>
   </div>
 
   <div class="card hidden" id="screen-quiz">
     <div class="progress"><i id="bar" style="width:0%"></i></div>
     <div class="qcount" id="qcount"></div>
     <div class="qtext" id="qtext"></div>
-    <div class="qhint" id="qhint"></div>
     <div id="opts"></div>
     <button class="back" id="btnBack">← 上一题</button>
   </div>
@@ -126,51 +123,31 @@ const RESULTS={
 let idx=0; const answers=[];
 const $=id=>document.getElementById(id);
 function show(id){["screen-start","screen-quiz","screen-result"].forEach(s=>$(s).classList.toggle("hidden",s!==id));const el=$(id);el.style.animation="none";void el.offsetWidth;el.style.animation="";window.scrollTo(0,0);}
-let advanceTimer=null;
 function renderQ(){
   const cur=QUESTIONS[idx];
-  let picks=answers[idx]?[...answers[idx]]:[];
   $("bar").style.width=(idx/QUESTIONS.length*100)+"%";
   $("qcount").textContent="第 "+(idx+1)+" / "+QUESTIONS.length+" 题";
   $("qtext").textContent=cur.q;
   const box=$("opts"); box.innerHTML="";
-  const upd=()=>{
-    [...box.children].forEach((b,oi)=>{
-      const t=cur.o[oi][1];
-      b.classList.toggle("picked",picks[0]===t);
-      b.classList.toggle("picked2",picks[1]===t);
-    });
-    $("qhint").textContent = picks.length===0 ? "先选「最像我」的一个" : (picks.length===1 ? "再选「第二像我」的一个，两个都选完自动下一题" : "好，就是这两个");
-  };
   cur.o.forEach(([txt,t],oi)=>{
     const b=document.createElement("button"); b.className="opt"; b.textContent=txt; b.style.animationDelay=(oi*0.05)+"s";
-    b.onclick=()=>{
-      clearTimeout(advanceTimer);
-      if(picks[0]===t){picks=picks.slice(1);}
-      else if(picks[1]===t){picks=picks.slice(0,1);}
-      else if(picks.length<2){picks.push(t);}
-      else {picks[1]=t;}
-      upd();
-      if(picks.length===2){
-        answers[idx]=[...picks];
-        advanceTimer=setTimeout(()=>{ idx++; if(idx<QUESTIONS.length){renderQ();} else {showResult();} },260);
-      }
-    };
+    if(answers[idx]===t) b.classList.add("picked");
+    b.onclick=()=>{answers[idx]=t; b.classList.add("picked"); setTimeout(()=>{ idx++; if(idx<QUESTIONS.length){renderQ();} else {showResult();} },180);};
     box.appendChild(b);
   });
-  upd();
   $("btnBack").style.visibility = idx===0 ? "hidden":"visible";
 }
 function compute(){
   const score={"直":0,"细":0,"慢":0,"理":0,"自":0,"守":0};
-  answers.forEach(pair=>{ if(!pair) return; score[pair[0]]+=2; if(pair[1]) score[pair[1]]+=1; });
+  answers.forEach(t=>{ if(t) score[t]++; });
   const max=Math.max(...Object.values(score));
   const tied=Object.keys(score).filter(k=>score[k]===max);
   let main=tied[0];
-  if(tied.length>1 && answers[11] && tied.includes(answers[11][0])) main=answers[11][0];
+  if(tied.length>1 && tied.includes(answers[11])) main=answers[11];
   const sub=tied.find(k=>k!==main) || Object.keys(score).sort((a,b)=>score[b]-score[a])[1];
   return {main,sub,score};
 }
+
 
 let lastMain=null,lastSub=null;
 function showResult(){
