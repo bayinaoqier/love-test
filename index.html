@@ -26,7 +26,9 @@ h1{font-size:33px;line-height:1.35;margin-bottom:14px;letter-spacing:.5px}
 .progress{height:10px;background:#ffe3ea;border-radius:99px;overflow:hidden;margin-bottom:10px}
 .progress i{display:block;height:100%;background:linear-gradient(90deg,#ff8fab,#e8436b);border-radius:99px;transition:width .35s ease}
 .qcount{color:#c2748a;font-size:13px;font-weight:600;letter-spacing:1.5px;margin-bottom:14px}
-.qtext{font-size:21px;font-weight:700;line-height:1.55;margin-bottom:22px}
+.qtext{font-size:21px;font-weight:700;line-height:1.55;margin-bottom:8px}
+.qhint{color:#c2748a;font-size:13.5px;margin-bottom:20px}
+.opt.picked2{background:#fff7e8;border-color:#e8a33d;color:#7a4a12;font-weight:600}
 .opt{display:block;width:100%;text-align:left;background:#fff9fa;border:1.5px solid #f3d7de;color:#46323a;font-size:16px;line-height:1.55;padding:15px 17px;border-radius:18px;margin-bottom:11px;cursor:pointer;animation:fadeUp .35s ease both;transition:background .15s ease,border-color .15s ease}
 .opt:active,.opt.picked{background:linear-gradient(120deg,#ffeef2,#ffe0e8);border-color:#e8436b;color:#8c1d3f;font-weight:600;box-shadow:0 8px 20px rgba(232,67,107,.16)}
 .back{background:none;border:none;color:#b0838e;font-size:14px;cursor:pointer;padding:8px 0}
@@ -55,16 +57,17 @@ h1{font-size:33px;line-height:1.35;margin-bottom:14px;letter-spacing:.5px}
     <div class="hero">💌</div>
     <span class="badge">趣味测试 · 12 道题</span>
     <h1>你在恋爱里，<br>是<span class="grad">哪种人</span>？</h1>
-    <p class="sub">12 道恋爱情境题，3 分钟测出你的恋爱类型：热烈直球、心思细腻、慢热深情、理性克制、自由独立、默默守护——哪一个才是恋爱里的你？</p>
+    <p class="sub">12 道恋爱情境题，每题选两个——最像你的 + 第二像你的，再也不用纠结只能选一个。3 分钟测出你的恋爱类型：热烈直球、心思细腻、慢热深情、理性克制、自由独立、默默守护——哪一个才是恋爱里的你？</p>
     <div class="meta"><span>⏱ 约 3 分钟</span><span>💌 6 种结果</span><span>📸 结果可截图分享</span></div>
     <button class="btn" id="btnStart">开始测试</button>
-    <p class="disc">凭直觉选，别想太多，第一个念头通常最准。<br>本测试为趣味娱乐，非专业心理测评，仅供自我探索参考。</p>
+    <p class="disc">凭直觉选：先点最像你的，再点第二像你的，两个都点完自动下一题。<br>本测试为趣味娱乐，非专业心理测评，仅供自我探索参考。</p>
   </div>
 
   <div class="card hidden" id="screen-quiz">
     <div class="progress"><i id="bar" style="width:0%"></i></div>
     <div class="qcount" id="qcount"></div>
     <div class="qtext" id="qtext"></div>
+    <div class="qhint" id="qhint"></div>
     <div id="opts"></div>
     <button class="back" id="btnBack">← 上一题</button>
   </div>
@@ -97,18 +100,18 @@ h1{font-size:33px;line-height:1.35;margin-bottom:14px;letter-spacing:.5px}
 
 <script>
 const QUESTIONS=[
-{q:"喜欢上一个人时，你通常会？",o:[["主动表白，喜欢就说，不想猜来猜去","直"],["先默默照顾对方，行动做满、嘴上不说","守"],["先观察很久，确定对方的心意才敢靠近","慢"],["在心里先分析合不合适，想清楚再行动","理"],["顺其自然，缘分到了就在一起，不强求","自"],["从细节里试探对方的反应，一点点确认自己没会错意","细"]]},
-{q:"对方忙起来，3 个小时没回你消息，你会？",o:[["有点慌，忍不住想是不是自己说错了什么","细"],["忙自己的事，他回了我再回","自"],["发个表情包提醒一下，顺便问在干嘛","直"],["能理解，成年人都有自己的事，晚上再说也行","理"],["不会多问，但这件事会在心里默默记着","慢"],["问一句是不是遇到什么事了、需不需要帮忙","守"]]},
-{q:"约会怎么安排，你更像哪种？",o:[["先列几个选项算好时间和预算，再一起挑","理"],["不做计划，走到哪算哪，随心逛","自"],["提前问清对方想吃什么、怕不怕累，按他的喜好来","细"],["不声不响订好他提过想去的那家店","守"],["有点紧张，提前想半天话题，怕冷场","慢"],["直接问“你想去哪”，他说哪就哪，爽快定","直"]]},
+{q:"喜欢上一个人时，你的第一步通常是？",o:[["主动表白，喜欢就说，不想猜来猜去","直"],["不表白，先默默照顾他，用行动一点点靠近","守"],["先观察很久，确定他对我也有意思才敢靠近","慢"],["先在心里分析合不合适，想清楚再决定要不要开始","理"],["顺其自然，不刻意推进，缘分到了就在一起","自"],["从细节里试探他的反应，一点点确认自己没会错意","细"]]},
+{q:"对方忙起来，3 个小时没回你消息，你的第一反应是？",o:[["有点慌，忍不住复盘是不是自己哪句话说错了","细"],["忙自己的事，他回了我再回","自"],["发个表情包提醒一下，顺便问一句在干嘛","直"],["能理解，成年人都有自己的事，晚上再说也行","理"],["不会多问，但这件事会在心里默默记着","慢"],["先担心他，问一句是不是遇到什么事了","守"]]},
+{q:"约会怎么安排，你更像哪种？",o:[["先列几个选项算好时间和预算，再一起挑","理"],["不做计划，走到哪算哪，随心逛","自"],["全程留意他的状态，他累了就改行程，怕他不舒服","细"],["不声不响提前订好他提过想去的那家店","守"],["有点紧张，提前想了半天话题，还是怕冷场","慢"],["我直接定我最想去的地方，带他去体验","直"]]},
 {q:"吵架的时候，你的第一反应是？",o:[["当场说清楚，不隔夜","直"],["先冷静半天，想清逻辑再谈","理"],["情绪先上来，容易先自责，怕他不要我了","细"],["先沉默，不知道怎么开口，越急越说不出","慢"],["需要独处空间，别追着问，我想通了自然会回来","自"],["先低头哄好他，哪怕不全是我的错，先别让他难过","守"]]},
-{q:"对方情绪低落时，你会？",o:[["陪着他，买他爱吃的，能帮忙解决的直接上手","守"],["抱抱他，耐心听他说完，先共情再谈别的","细"],["直接问“怎么了、需要我做什么”，不绕弯","直"],["帮他分析问题出在哪，一起找解决办法","理"],["给他空间不打扰，只留一句“我一直在”","自"],["不太会安慰，就安安静静在旁边陪着","慢"]]},
-{q:"纪念日和礼物，你的态度是？",o:[["大方准备惊喜，仪式感拉满","直"],["提前很久就留意他想要什么，悄悄买好","守"],["礼物不在贵，在于一看就知道是专门给他的","细"],["实用为主，买他真正用得上的","理"],["一起出去玩一次，比礼物本身更重要","自"],["嘴上说不用过，心里其实提前想了很久","慢"]]},
-{q:"对方要和异性朋友们聚会，你会？",o:[["有点吃醋，会旁敲侧击问都有谁","细"],["完全没事，他有自己的朋友圈很正常","自"],["直接说“我会吃醋”，但不会拦他","直"],["相信他，但会看他事后的态度和分寸","理"],["心里不舒服也不说，装作不在意","慢"],["不干涉，但会发消息关心他到家了没有","守"]]},
-{q:"如果要分开一段时间（异地），你觉得自己会？",o:[["每天主动打视频，开心难过都第一时间分享","直"],["想很多，特别需要对方稳定的回应才安心","细"],["经常寄东西过去，把照顾落到实处","守"],["先谈好联系的频率和规则，按约定来就不慌","理"],["各忙各的，有空再聊，信任够了就不用黏","自"],["想念也不太说，怕给对方添负担，自己消化","慢"]]},
-{q:"公开恋情这件事，你更像？",o:[["大方官宣，让所有人都知道","直"],["低调为主，亲近的朋友知道就行","慢"],["看对方的想法，他想公开就公开","守"],["想清楚再公开，不喜欢被围观和评论","理"],["顺其自然，不刻意藏、也不刻意秀","自"],["想秀又有点害羞，先发个暗示款的","细"]]},
-{q:"对方临时有事，放了你约会的鸽子，你会？",o:[["直接问为什么，并说明下次别这样","直"],["嘴上说没事，心里难受一整天","细"],["先问清原因，确实有急事就能理解","理"],["正好自己安排点别的事，不太受影响","自"],["说没关系，但下一次约会会变得更谨慎","慢"],["反过来安慰他，让他先忙正事","守"]]},
+{q:"对方情绪低落时，只能先做一件事，你的第一动作是？",o:[["先不说话，去买他爱吃的、把能办的事办了，用行动哄","守"],["先抱抱他、听他说完，情绪比道理优先","细"],["直接问“到底怎么了”，先要个明白","直"],["先帮他捋一遍问题出在哪，一起找解决办法","理"],["先退开给他空间，只留一句“我一直在”","自"],["想安慰又怕说错话，就在旁边坐着，等他先开口","慢"]]},
+{q:"纪念日只能用一种方式过，你选哪种？",o:[["大方准备惊喜，仪式感必须拉满","直"],["送他惦记很久的东西，提前悄悄买好","守"],["送个一看就知道是专门给他的小礼物，贵不贵不重要","细"],["不搞虚的，送最实用的，或者把钱花在两个人的正事上","理"],["礼物免了，一起出去玩一次，体验比东西重要","自"],["嘴上说不用过，心里其实提前想了很久","慢"]]},
+{q:"对方要和异性朋友们聚会，你会？",o:[["有点吃醋，会旁敲侧击问都有谁","细"],["完全没事，他有自己的朋友圈很正常","自"],["直接说“我会吃醋”，但不会拦他","直"],["相信他，但会看他事后的态度和分寸","理"],["心里不舒服也不说，装作不在意","慢"],["不干涉，但会等他发消息说到家了才放心","守"]]},
+{q:"如果要分开一段时间（异地），你觉得自己会？",o:[["每天主动打视频，开心难过都第一时间分享","直"],["想很多，特别需要他稳定的回应才安心","细"],["经常寄东西过去，把照顾落到实处","守"],["先谈好联系的频率和规则，按约定来就不慌","理"],["各忙各的，有空再聊，信任够了就不用黏","自"],["想念也不太说，怕给对方添负担，自己消化","慢"]]},
+{q:"公开恋情这件事，你更像？",o:[["大方官宣，让所有人都知道","直"],["低调为主，亲近的朋友知道就行","慢"],["看他的想法，他想公开就公开，我配合","守"],["想清楚再公开，不喜欢被围观和评论","理"],["顺其自然，不刻意藏、也不刻意秀","自"],["想秀又有点害羞，先发个暗示款的","细"]]},
+{q:"对方临时有事，放了你约会的鸽子，你会？",o:[["直接问为什么，并说明下次别这样","直"],["嘴上说没事，心里会翻来覆去想他是不是不在乎我","细"],["先问清原因，确实有急事就能理解","理"],["正好自己安排点别的事，不太受影响","自"],["说没关系，但心里悄悄给他扣分，下次约会更谨慎","慢"],["反过来安慰他，让他先忙正事","守"]]},
 {q:"聊到未来（比如结婚）时，你是？",o:[["认定了就敢规划，工作和生活一起往前冲","直"],["要慢慢来，感情稳了我才敢想那么远","慢"],["先看现实条件合不合适，合适了自然水到渠成","理"],["不想被时间表推着走，舒服最重要","自"],["未来里全是他，连自己的选择都会先考虑到他","守"],["既向往又害怕，会反复确认他是不是认真的","细"]]},
-{q:"你最希望对方怎么对你？",o:[["明目张胆地偏爱我，有话直说、别让我猜","直"],["记得我的小习惯和小情绪，不用我说就懂","细"],["给我时间，别催我打开自己，慢慢等我","慢"],["尊重我的判断，像队友一样和我商量事情","理"],["给我空间，也给我归属感","自"],["不用多说，关键时刻永远站在我这边","守"]]}
+{q:"如果只能留一样，你最希望对方给你什么？",o:[["明目张胆的偏爱，有话直说、别让我猜","直"],["不用我说就懂，我的小习惯和小情绪他都记得","细"],["时间，别催我打开自己，慢慢等我","慢"],["尊重，像队友一样和我商量事情","理"],["空间，别黏太紧，留足我自己的世界","自"],["关键时刻永远站在我这边的底气","守"]]}
 ];
 
 const RESULTS={
@@ -123,29 +126,52 @@ const RESULTS={
 let idx=0; const answers=[];
 const $=id=>document.getElementById(id);
 function show(id){["screen-start","screen-quiz","screen-result"].forEach(s=>$(s).classList.toggle("hidden",s!==id));const el=$(id);el.style.animation="none";void el.offsetWidth;el.style.animation="";window.scrollTo(0,0);}
+let advanceTimer=null;
 function renderQ(){
   const cur=QUESTIONS[idx];
+  let picks=answers[idx]?[...answers[idx]]:[];
   $("bar").style.width=(idx/QUESTIONS.length*100)+"%";
   $("qcount").textContent="第 "+(idx+1)+" / "+QUESTIONS.length+" 题";
   $("qtext").textContent=cur.q;
   const box=$("opts"); box.innerHTML="";
+  const upd=()=>{
+    [...box.children].forEach((b,oi)=>{
+      const t=cur.o[oi][1];
+      b.classList.toggle("picked",picks[0]===t);
+      b.classList.toggle("picked2",picks[1]===t);
+    });
+    $("qhint").textContent = picks.length===0 ? "先选「最像我」的一个" : (picks.length===1 ? "再选「第二像我」的一个，两个都选完自动下一题" : "好，就是这两个");
+  };
   cur.o.forEach(([txt,t],oi)=>{
     const b=document.createElement("button"); b.className="opt"; b.textContent=txt; b.style.animationDelay=(oi*0.05)+"s";
-    b.onclick=()=>{answers[idx]=t; b.classList.add("picked"); setTimeout(()=>{ idx++; if(idx<QUESTIONS.length){renderQ();} else {showResult();} },180);};
+    b.onclick=()=>{
+      clearTimeout(advanceTimer);
+      if(picks[0]===t){picks=picks.slice(1);}
+      else if(picks[1]===t){picks=picks.slice(0,1);}
+      else if(picks.length<2){picks.push(t);}
+      else {picks[1]=t;}
+      upd();
+      if(picks.length===2){
+        answers[idx]=[...picks];
+        advanceTimer=setTimeout(()=>{ idx++; if(idx<QUESTIONS.length){renderQ();} else {showResult();} },260);
+      }
+    };
     box.appendChild(b);
   });
+  upd();
   $("btnBack").style.visibility = idx===0 ? "hidden":"visible";
 }
 function compute(){
   const score={"直":0,"细":0,"慢":0,"理":0,"自":0,"守":0};
-  answers.forEach(t=>score[t]++);
+  answers.forEach(pair=>{ if(!pair) return; score[pair[0]]+=2; if(pair[1]) score[pair[1]]+=1; });
   const max=Math.max(...Object.values(score));
   const tied=Object.keys(score).filter(k=>score[k]===max);
   let main=tied[0];
-  if(tied.length>1 && tied.includes(answers[11])) main=answers[11];
+  if(tied.length>1 && answers[11] && tied.includes(answers[11][0])) main=answers[11][0];
   const sub=tied.find(k=>k!==main) || Object.keys(score).sort((a,b)=>score[b]-score[a])[1];
   return {main,sub,score};
 }
+
 let lastMain=null,lastSub=null;
 function showResult(){
   const {main,sub}=compute(); lastMain=main; lastSub=sub;
