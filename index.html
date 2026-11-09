@@ -25,22 +25,35 @@ h1{font-size:33px;line-height:1.35;margin-bottom:14px;letter-spacing:.5px}
 .disc{color:#bfa3ab;font-size:12px;text-align:center;margin-top:18px;line-height:1.6}
 .progress{height:10px;background:#ffe3ea;border-radius:99px;overflow:hidden;margin-bottom:10px}
 .progress i{display:block;height:100%;background:linear-gradient(90deg,#ff8fab,#e8436b);border-radius:99px;transition:width .35s ease}
-.qcount{color:#c2748a;font-size:13px;font-weight:600;letter-spacing:1.5px;margin-bottom:14px}
-.qtext{font-size:21px;font-weight:700;line-height:1.55;margin-bottom:22px}
-.opt{display:block;width:100%;text-align:left;background:#fff9fa;border:1.5px solid #f3d7de;color:#46323a;font-size:16px;line-height:1.55;padding:15px 17px;border-radius:18px;margin-bottom:11px;cursor:pointer;animation:fadeUp .35s ease both;transition:background .15s ease,border-color .15s ease}
+.qcount{color:#c2748a;font-size:13px;font-weight:600;letter-spacing:1.5px;margin-bottom:6px}
+.qtitle{font-size:14px;color:#d93a5e;font-weight:700;letter-spacing:2px;margin-bottom:10px}
+.qtext{font-size:18.5px;font-weight:600;line-height:1.6;margin-bottom:16px}
+.abcard{display:flex;gap:11px;background:#fff9fa;border:1.5px solid #f3d7de;border-radius:16px;padding:13px 15px;margin-bottom:10px;animation:fadeUp .35s ease both}
+.abcard .ab{flex:none;width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#f0567a,#e8436b);color:#fff;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.abcard.b .ab{background:linear-gradient(135deg,#f5a65b,#e8893d)}
+.abcard p{font-size:15px;line-height:1.65;color:#46323a}
+.qask{font-size:13.5px;color:#b0838e;margin:16px 0 10px}
+.opt{display:block;width:100%;text-align:center;background:#fff;border:1.5px solid #f3d7de;color:#46323a;font-size:16px;line-height:1.5;padding:13px 17px;border-radius:999px;margin-bottom:9px;cursor:pointer;animation:fadeUp .35s ease both;transition:background .15s ease,border-color .15s ease}
 .opt:active,.opt.picked{background:linear-gradient(120deg,#ffeef2,#ffe0e8);border-color:#e8436b;color:#8c1d3f;font-weight:600;box-shadow:0 8px 20px rgba(232,67,107,.16)}
 .back{background:none;border:none;color:#b0838e;font-size:14px;cursor:pointer;padding:8px 0}
 #screen-result .rtype,#screen-result .rname,#screen-result .rquote,#screen-result .rsub,#screen-result .tags{text-align:center}
 .rtype{font-size:14px;color:#d93a5e;font-weight:600;letter-spacing:4px;margin-top:2px}
 .rname{font-size:37px;font-weight:800;margin:10px 0 14px;background:linear-gradient(90deg,#f0567a,#d6336c);-webkit-background-clip:text;background-clip:text;color:transparent}
 .rquote{color:#6d4a53;font-size:16.5px;line-height:1.65;background:#fff5f7;border:1px solid #ffe0e8;border-radius:16px;padding:14px 16px;margin-bottom:12px}
-.rsub{color:#b0838e;font-size:14px;margin-bottom:20px}
+.rsub{color:#b0838e;font-size:13.5px;line-height:1.7;margin-bottom:20px}
 .sec{margin-bottom:16px;border-top:1px dashed #f3d7de;padding-top:15px;text-align:left}
 .sec h3{font-size:15px;color:#d93a5e;margin-bottom:7px;display:flex;align-items:center;gap:8px}
 .sec h3::before{content:"";width:4px;height:15px;border-radius:2px;background:linear-gradient(180deg,#f0567a,#e8436b)}
 .sec p{font-size:15px;line-height:1.8;color:#55414a}
+.sec p b{color:#8c1d3f}
 .tags{margin-bottom:22px}
 .tags span{display:inline-block;background:linear-gradient(120deg,#fff0f3,#ffe4ec);border:1px solid #ffd0dc;color:#c24b67;font-size:13px;font-weight:500;padding:6px 12px;border-radius:999px;margin:0 6px 6px 0}
+.dims{margin-bottom:6px}
+.dimrow{display:flex;align-items:center;gap:10px;margin-bottom:11px}
+.dimrow .dl{flex:none;width:86px;font-size:13.5px;color:#6d4a53;font-weight:600}
+.dimrow .dt{flex:1;height:9px;background:#ffe3ea;border-radius:99px;overflow:hidden}
+.dimrow .dt i{display:block;height:100%;background:linear-gradient(90deg,#ff8fab,#e8436b);border-radius:99px}
+.dimrow .dv{flex:none;width:118px;font-size:12.5px;color:#b0838e;text-align:right}
 .modal{position:fixed;inset:0;background:rgba(40,15,22,.72);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;z-index:9}
 .modal img{width:min(88vw,360px);border-radius:20px;box-shadow:0 16px 50px rgba(0,0,0,.35)}
 .modal p{color:#ffd9e1;font-size:13.5px;margin-top:14px}
@@ -53,33 +66,38 @@ h1{font-size:33px;line-height:1.35;margin-bottom:14px;letter-spacing:.5px}
 
   <div class="card" id="screen-start">
     <div class="hero">💌</div>
-    <span class="badge">趣味测试 · 12 道题</span>
+    <span class="badge">趣味测试 · 16 道题</span>
     <h1>你在恋爱里，<br>是<span class="grad">哪种人</span>？</h1>
-    <p class="sub">12 道恋爱情境题，3 分钟测出你的恋爱类型：热烈直球、心思细腻、慢热深情、理性克制、自由独立、默默守护——哪一个才是恋爱里的你？</p>
-    <div class="meta"><span>⏱ 约 3 分钟</span><span>💌 6 种结果</span><span>📸 结果可截图分享</span></div>
+    <p class="sub">有些人一开始热烈，有些人要等很久才敢认真。16 道题，每题两种反应，没有对错，选更像你的那一边和程度，测出你的恋爱主型、安全感来源和冲突沟通方式。</p>
+    <div class="meta"><span>⏱ 约 3 分钟</span><span>💌 8 种主型</span><span>📸 结果可截图分享</span></div>
     <button class="btn" id="btnStart">开始测试</button>
-    <p class="disc">凭直觉选，别想太多，第一个念头通常最准。<br>本测试为趣味娱乐，非专业心理测评，仅供自我探索参考。</p>
+    <p class="disc">按照你真实的反应作答，而不是你觉得“应该”怎么做。<br>本测试为趣味娱乐，非专业心理测评，仅供自我探索参考。</p>
   </div>
 
   <div class="card hidden" id="screen-quiz">
     <div class="progress"><i id="bar" style="width:0%"></i></div>
     <div class="qcount" id="qcount"></div>
+    <div class="qtitle" id="qtitle"></div>
     <div class="qtext" id="qtext"></div>
+    <div class="abcard a"><div class="ab">A</div><p id="qa"></p></div>
+    <div class="abcard b"><div class="ab">B</div><p id="qb"></p></div>
+    <div class="qask">哪一边更像你？</div>
     <div id="opts"></div>
     <button class="back" id="btnBack">← 上一题</button>
   </div>
 
   <div class="card hidden" id="screen-result">
-    <div class="rtype">你的恋爱类型是</div>
+    <div class="rtype">你的恋爱主型是</div>
     <div class="rname" id="rname"></div>
     <p class="rquote" id="rquote"></p>
     <p class="rsub" id="rsub"></p>
     <div class="tags" id="rtags"></div>
+    <div class="sec"><h3>你的恋爱倾向图</h3><div class="dims" id="rdims"></div></div>
     <div class="sec"><h3>你的恋爱底色</h3><p id="rbase"></p></div>
-    <div class="sec"><h3>你爱一个人的样子</h3><p id="rlove"></p></div>
-    <div class="sec"><h3>你的优势</h3><p id="rgood"></p></div>
+    <div class="sec"><h3>你最真实的矛盾点</h3><p id="rcontra"></p></div>
+    <div class="sec"><h3>你在关系里的安全感来源</h3><p id="rsec"></p></div>
+    <div class="sec"><h3>你和另一半发生矛盾时</h3><p id="rconf"></p></div>
     <div class="sec"><h3>你容易踩的坑</h3><p id="rpit"></p></div>
-    <div class="sec"><h3>最合拍的类型</h3><p id="rmatch"></p></div>
     <div class="sec"><h3>给你的一句话</h3><p id="rword"></p></div>
     <button class="btn" id="btnCard">生成结果卡（截图分享）</button>
     <button class="btn ghost" id="btnAgain">再测一次</button>
@@ -97,27 +115,51 @@ h1{font-size:33px;line-height:1.35;margin-bottom:14px;letter-spacing:.5px}
 
 <script>
 const QUESTIONS=[
-{q:"喜欢上一个人时，你的第一步通常是？",o:[["主动表白，喜欢就说，不想猜来猜去","直"],["不表白，先默默照顾他，用行动一点点靠近","守"],["先观察很久，确定他对我也有意思才敢靠近","慢"],["先在心里分析合不合适，想清楚再决定要不要开始","理"],["顺其自然，不刻意推进，缘分到了就在一起","自"],["从细节里试探他的反应，一点点确认自己没会错意","细"]]},
-{q:"对方忙起来，3 个小时没回你消息，你的第一反应是？",o:[["有点慌，忍不住复盘是不是自己哪句话说错了","细"],["忙自己的事，他回了我再回","自"],["发个表情包提醒一下，顺便问一句在干嘛","直"],["能理解，成年人都有自己的事，晚上再说也行","理"],["不会多问，但这件事会在心里默默记着","慢"],["先担心他，问一句是不是遇到什么事了","守"]]},
-{q:"约会怎么安排，你更像哪种？",o:[["先列几个选项算好时间和预算，再一起挑","理"],["不做计划，走到哪算哪，随心逛","自"],["全程留意他的状态，他累了就改行程，怕他不舒服","细"],["不声不响提前订好他提过想去的那家店","守"],["有点紧张，提前想了半天话题，还是怕冷场","慢"],["我直接定我最想去的地方，带他去体验","直"]]},
-{q:"吵架的时候，你的第一反应是？",o:[["当场说清楚，不隔夜","直"],["先冷静半天，想清逻辑再谈","理"],["情绪先上来，容易先自责，怕他不要我了","细"],["先沉默，不知道怎么开口，越急越说不出","慢"],["需要独处空间，别追着问，我想通了自然会回来","自"],["先低头哄好他，哪怕不全是我的错，先别让他难过","守"]]},
-{q:"对方情绪低落时，只能先做一件事，你的第一动作是？",o:[["先不说话，去买他爱吃的、把能办的事办了，用行动哄","守"],["先抱抱他、听他说完，情绪比道理优先","细"],["直接问“到底怎么了”，先要个明白","直"],["先帮他捋一遍问题出在哪，一起找解决办法","理"],["先退开给他空间，只留一句“我一直在”","自"],["想安慰又怕说错话，就在旁边坐着，等他先开口","慢"]]},
-{q:"纪念日只能用一种方式过，你选哪种？",o:[["大方准备惊喜，仪式感必须拉满","直"],["送他惦记很久的东西，提前悄悄买好","守"],["送个一看就知道是专门给他的小礼物，贵不贵不重要","细"],["不搞虚的，送最实用的，或者把钱花在两个人的正事上","理"],["礼物免了，一起出去玩一次，体验比东西重要","自"],["嘴上说不用过，心里其实提前想了很久","慢"]]},
-{q:"对方要和异性朋友们聚会，你会？",o:[["有点吃醋，会旁敲侧击问都有谁","细"],["完全没事，他有自己的朋友圈很正常","自"],["直接说“我会吃醋”，但不会拦他","直"],["相信他，但会看他事后的态度和分寸","理"],["心里不舒服也不说，装作不在意","慢"],["不干涉，但会等他发消息说到家了才放心","守"]]},
-{q:"如果要分开一段时间（异地），你觉得自己会？",o:[["每天主动打视频，开心难过都第一时间分享","直"],["想很多，特别需要他稳定的回应才安心","细"],["经常寄东西过去，把照顾落到实处","守"],["先谈好联系的频率和规则，按约定来就不慌","理"],["各忙各的，有空再聊，信任够了就不用黏","自"],["想念也不太说，怕给对方添负担，自己消化","慢"]]},
-{q:"公开恋情这件事，你更像？",o:[["大方官宣，让所有人都知道","直"],["低调为主，亲近的朋友知道就行","慢"],["看他的想法，他想公开就公开，我配合","守"],["想清楚再公开，不喜欢被围观和评论","理"],["顺其自然，不刻意藏、也不刻意秀","自"],["想秀又有点害羞，先发个暗示款的","细"]]},
-{q:"对方临时有事，放了你约会的鸽子，你会？",o:[["直接问为什么，并说明下次别这样","直"],["嘴上说没事，心里会翻来覆去想他是不是不在乎我","细"],["先问清原因，确实有急事就能理解","理"],["正好自己安排点别的事，不太受影响","自"],["说没关系，但心里悄悄给他扣分，下次约会更谨慎","慢"],["反过来安慰他，让他先忙正事","守"]]},
-{q:"聊到未来（比如结婚）时，你是？",o:[["认定了就敢规划，工作和生活一起往前冲","直"],["要慢慢来，感情稳了我才敢想那么远","慢"],["先看现实条件合不合适，合适了自然水到渠成","理"],["不想被时间表推着走，舒服最重要","自"],["未来里全是他，连自己的选择都会先考虑到他","守"],["既向往又害怕，会反复确认他是不是认真的","细"]]},
-{q:"如果只能留一样，你最希望对方给你什么？",o:[["明目张胆的偏爱，有话直说、别让我猜","直"],["不用我说就懂，我的小习惯和小情绪他都记得","细"],["时间，别催我打开自己，慢慢等我","慢"],["尊重，像队友一样和我商量事情","理"],["空间，别黏太紧，留足我自己的世界","自"],["关键时刻永远站在我这边的底气","守"]]}
+{t:"心动的开始",q:"你刚对一个人产生好感，还不确定对方是否也喜欢你。",a:"我会找机会单独约对方，即使可能被拒绝，也想主动创造进展。",b:"我更愿意先在自然相处中了解对方，哪怕关系推进得慢一点。",d:"P"},
+{t:"突然减少的联系",q:"你们平时每天都聊天。最近对方因为工作忙，联系少了很多，但已经提前告诉过你。",a:"虽然知道原因，我还是希望每天能有一点明确的回应，这会让我安心。",b:"知道对方在忙就足够了。我可以安心做自己的事情，等忙完再联系。",d:"S"},
+{t:"如何表达感动",q:"你们已经在一起。某天对方做了一件特别贴心的事，你很感动。",a:"我会当场告诉对方自己有多开心、多喜欢这份心意。",b:"我会把这份感动记住，之后用实际行动回馈对方。",d:"E"},
+{t:"周末怎么过",q:"难得的周末，你和恋人都没有必须完成的事情。",a:"我希望先留一点时间做自己的事，再安排两个人的时间。",b:"我更期待把大部分时间留给彼此，一起做点什么。",d:"I"},
+{t:"争执发生时",q:"你们因为一件事意见不同，刚刚发生争执，但还没有严重失控。",a:"我更希望当天把最核心的问题说清楚，不喜欢带着悬而未决的矛盾过夜。",b:"我更希望先停止讨论，等情绪完全平复之后再认真谈。",d:"C"},
+{t:"对方也喜欢你",q:"你喜欢的人主动向你释放了明确的好感信号。",a:"我会顺势增加单独相处的机会，看看能不能进一步确定关系。",b:"即使知道对方喜欢我，我也希望保持原来的节奏，再多了解一段时间。",d:"P"},
+{t:"爱需要说出来吗",q:"你们相处得很好，对方在行动上也很照顾你，但很少主动表达喜欢或欣赏。",a:"我还是会希望对方偶尔明确说出爱意，让我知道自己被认真放在心上。",b:"只要平时的相处让我感受到爱，我就不太需要额外的言语确认。",d:"S"},
+{t:"想念一个人的时候",q:"你有点想念恋人，但最近几天暂时见不到面。",a:"我会直接告诉对方“想你了”，也很自然地表达自己的依恋。",b:"我可能不会特意说出来，而是计划下次见面，或者准备一件贴心的小事。",d:"E"},
+{t:"一起旅行",q:"你和恋人计划去旅行，两个人有一些不同的兴趣。",a:"我觉得可以安排几个小时各玩各的，晚上再分享彼此的经历。",b:"我更期待大部分行程都一起体验，哪怕有些活动不是我的最爱。",d:"I"},
+{t:"一句无心的话",q:"恋人随口说了一句话，让你有点难受，但对方似乎没有意识到。",a:"我倾向于尽快告诉对方自己的感受，避免误会慢慢积累。",b:"我会先自己消化、想清楚是不是误会，再找合适的时机表达。",d:"C"},
+{t:"暧昧的分界线",q:"你们已经暧昧了一段时间，相处愉快，但一直没有明确关系。",a:"我会在合适的时机主动询问彼此的想法，不想长期停在模糊状态。",b:"我希望再经历一些共同的事情，等自己更了解对方之后再讨论关系。",d:"P"},
+{t:"临时取消的约定",q:"恋人临时因为急事取消了约会，解释了原因，也主动提出改天补上。",a:"我可以理解，但还是希望对方多表达一点歉意和重视，让我的失落得到回应。",b:"既然对方解释清楚并愿意补约，我通常就能放下这件事，不需要额外安抚。",d:"S"},
+{t:"关系变得重要",q:"某一天，你突然发现这个人已经成为自己生活中非常重要的存在。",a:"我想找个机会告诉对方，TA对我来说有多重要。",b:"我更愿意通过持续的陪伴、投入和行动，让对方慢慢感受到这一点。",d:"E"},
+{t:"进入彼此的世界",q:"恋人希望加入你一直很喜欢的某个兴趣圈子，和你有更多共同生活。",a:"我很愿意分享，但也想保留一些只属于自己的活动和空间。",b:"我会很开心，觉得两个人的生活交集变多是一件亲密的事。",d:"I"},
+{t:"争执后的夜晚",q:"你们刚刚吵过架，现在双方都冷静下来了，但时间已经很晚。",a:"我希望至少花十分钟交换彼此的核心想法，不想什么都没说就去睡觉。",b:"我更愿意先休息，第二天状态更好时再完整讨论。",d:"C"},
+{t:"暂时的异地",q:"你们要分开生活一段时间，感情稳定，但彼此的作息会变得不同。",a:"我更希望提前商量好基本的联系频率，这会让我感觉关系很踏实。",b:"我更希望自然地联系，不用固定频率，只要彼此知道心意没变就好。",d:"S"}
 ];
+const SCALE=[["明显更像 A",3],["稍微更像 A",1],["稍微更像 B",-1],["明显更像 B",-3]];
+const DIMS={
+"P":{name:"靠近节奏",hi:"主动推进",lo:"谨慎靠近"},
+"E":{name:"爱意表达",hi:"直接表达",lo:"行动表达"},
+"I":{name:"个人空间",hi:"偏爱留白",lo:"偏爱陪伴"},
+"S":{name:"回应需求",hi:"需要明确回应",lo:"靠相处判断"},
+"C":{name:"冲突修复",hi:"及时沟通",lo:"整理后沟通"}
+};
 
 const RESULTS={
-"直":{name:"热烈直球型",quote:"爱就大方说，藏着掖着不是你的风格。",tags:["真诚","行动力","仪式感"],base:"你的恋爱底色是“明牌”：喜欢来得快、表达得也快，开心会分享，生气会直说，很少让对方猜。和你在一起不用玩解谜游戏，你给的安全感是直接给的。",love:"主动推进关系、仪式感拉满，开心难过第一个想告诉他。",good:"真诚、有行动力，能把一段关系带得热气腾腾。",pit:"你的直有时候太快太满，对方跟不上节奏时会觉得有压力；生气时脱口而出的话，事后你比谁都后悔。",match:"慢热深情型（你推他一把，他给你稳稳兜底）、理性克制型（他能接住你的情绪，还不跟你对冲）。",word:"直球没有错，给你的直球留一点停顿，等他跟上，就是满分。"},
-"细":{name:"心思细腻型",quote:"你总能比别人先一步，察觉他的情绪。",tags:["共情力","细节控","体贴"],base:"你的恋爱底色是“高清”：语气变了、回复慢了、表情不对了，你第一时间就感觉得到。你爱的不是热闹，是被认真对待的细节。",love:"记住他随口说的话、提前察觉他的低落，在他开口之前先把体贴递过去。",good:"共情力强，和你在一起的人，很少会觉得自己被忽视。",pit:"感觉太灵敏，也容易把“他只是累了”脑补成“他是不是不爱我了”。需要确认感不是你的错，但把每一次确认都变成考试，会把对方考累。",match:"热烈直球型（他的爱摆在明面上，正好喂饱你的安全感）、默默守护型（他的行动都在细节里，你恰好都看得见）。",word:"别用试探换确认，直接说“我需要你抱抱我”，比冷战一天有用得多。"},
-"慢":{name:"慢热深情型",quote:"你开花晚，但根扎得最深。",tags:["专一","稳定","长情"],base:"你的恋爱底色是“慢炖”：不轻易动心，动心之前先观察、先确认、先在心里过一百遍；可一旦认定，你比谁都长情。",love:"不张扬、不黏人，爱意都藏在长久的陪伴和“一直都在”里。",good:"稳定、专一、情绪不外泄，很少把关系谈得鸡飞狗跳。",pit:"你最大的问题是“不说”——想念不说、委屈不说、需要也不说，全指望对方自己悟。悟不到的时候，你就默默扣分，扣满了突然离开，对方还不知道发生了什么。",match:"热烈直球型（他会主动走完你们之间 99 步，你只要肯走那 1 步）、心思细腻型（你的沉默，对方读得懂）。",word:"慢热不是缺点，把门开一条缝，让对的人知道往哪进。"},
-"理":{name:"理性克制型",quote:"你不煽情，但你的爱经得起过日子。",tags:["靠谱","情绪稳定","队友型"],base:"你的恋爱底色是“务实”：很少上头，也很少失控；你判断一段关系看的不是心动峰值，而是合不合适、能不能长久。",love:"不说漂亮话，但会把对方放进自己的现实规划里——工作、城市、钱，一样样算清楚、安排好。",good:"情绪稳定、靠谱、能解决问题，是能一起扛事的队友型恋人。",pit:"对方难过的时候，第一反应是讲道理、给方案。可很多时候他要的不是方案，是先被抱一下。道理都对，就是时机不对。",match:"心思细腻型（对方把你说不出口的柔软补上）、热烈直球型（他的热乎气，正好化你的冷静脸）。",word:"先共情、再讲理，顺序换一下，你的爱就全被看见了。"},
-"自":{name:"自由独立型",quote:"你爱他，但你首先是你自己。",tags:["松弛感","信任","不内耗"],base:"你的恋爱底色是“留白”：有自己的生活、朋友和节奏，不把恋爱当成人生的全部，也不要求对方围着自己转。",love:"不查岗、不黏人、给足信任；在一起时质量很高，分开时各自精彩。",good:"松弛、不内耗，和你恋爱没有窒息感，关系反而容易长久。",pit:"独立过了头，会让对方觉得“你好像不需要我”。偶尔的依赖和示弱不是丢人，是给对方留一个进入你生活的入口。",match:"理性克制型（你俩像合伙开公司的，舒服又高效）、慢热深情型（都不黏人，细水长流）。",word:"自由不是拒绝亲密，是亲密里依然有风。"},
-"守":{name:"默默守护型",quote:"你不常说爱，但处处都是爱。",tags:["可靠","体贴","担当"],base:"你的恋爱底色是“行动派里的哑巴”：甜言蜜语说不出口，但对方提过的事你都记着，该你出现的时候你从不缺席。",love:"提前订好他想去的店、出事第一个赶到、把自己的需求往后排，先紧着他。",good:"可靠、体贴、有担当，和你在一起的人，生活层面从不用操心。",pit:"付出全靠对方自己发现，发现不了你就攒委屈，攒满了又觉得“全是我的错”。爱不是考试，别让他猜你做了多少。",match:"心思细腻型（你做的每一件小事，对方都看得见、记在心里）、热烈直球型（他会替你把爱喊出来）。",word:"偶尔把“我做了”说出来，不是邀功，是让爱有着落。"}
+"HHL":{name:"热烈陪伴派",quote:"喜欢一个人，就是想把热闹的生活分给TA一半。",tags:["主动","坦诚","亲密感"],base:"你很少把喜欢藏得太深。遇到心动的人，你愿意主动创造机会；确定关系之后，你也乐于表达爱意，分享生活。你享受的不是简单的“有人陪”，而是两个人能真正参与彼此的世界。开心的事情想一起经历，难过的时候也想有人在身边。",contra:"你可以很独立地处理生活，却可能在恋爱里格外渴望共同体验。当你主动安排很多事情时，你未必是想控制对方，只是想让TA成为自己生活里真实存在的一部分。",pit:"你习惯了积极表达，有时会忘记对方的情感节奏可能没有那么快。你觉得是热情的事情，对方可能需要更多时间才能适应。",word:"爱可以很热烈，但不必每时每刻都热烈。给彼此留一些自己的时间，反而能让分享变得更有趣。"},
+"HHH":{name:"自在直球派",quote:"我会大方地爱你，但不会因此弄丢自己。",tags:["坦诚","主动","边界感"],base:"你喜欢一个人时不会刻意装作冷淡。你会表达，会主动靠近，也愿意让对方知道自己的心意。但即使恋爱了，你也不打算把全部生活围绕着另一个人展开。对你来说，好的爱情不是两个人时时刻刻黏在一起，而是即使各自忙碌，也不需要猜测彼此的感情。",contra:"你表达感情时可能很热烈，但在日常生活里又很需要自由。你觉得这是两件完全不冲突的事情，对方却可能困惑：“你明明这么喜欢我，为什么又不想一直陪我？”",pit:"你认为明确表达过的爱意，就应该足以支撑一段时间的信任。但有些人需要的是持续的、具体的联系，而不只是一次很确定的表态。",word:"你的独立是一种优势。偶尔主动邀请对方进入你的日常，也不会减少你的自由。"},
+"HLL":{name:"主动陪伴派",quote:"我会先朝你走过去，之后用每一天证明我的心意。",tags:["行动力","陪伴","踏实"],base:"在感情开始的时候，你往往没有想象中那么被动。遇到心动的人，你愿意主动创造相处的机会，也不排斥让关系向前发展。但真正开始恋爱之后，你反而不一定是最会说情话的那一个。你更相信一起吃饭、共同经历事情，以及在生活里长久地照顾彼此。",contra:"你可能在追求阶段表现得很积极，正式在一起之后却显得平静了许多。并不一定是感情变淡，而是你从“努力走近”切换到了“认真相处”。",pit:"你认为持续陪伴本身就是爱的证明，却可能忽略对方也希望偶尔听见具体的情感表达。",word:"爱不需要天天说，但偶尔让对方听到你的心意，会让日常的陪伴有更明确的温度。"},
+"HLH":{name:"松弛行动派",quote:"爱你是一件确定的事，但我的生活也需要自己的节奏。",tags:["果断","务实","独立"],base:"你并不是对感情不积极。喜欢一个人时，你可以主动靠近，也愿意尝试发展关系。但你不喜欢让感情变成需要时时刻刻证明的事情。确定关系之后，你更习惯通过稳定的行动表示在乎，同时保留个人兴趣、朋友和独处的时间。",contra:"你可能在感情开始时很主动，但相处久了又显得不那么黏人。对你而言，关系越确定，越不需要频繁强调它的存在。但对方可能把这种状态理解成热情退去。",pit:"你很容易以自己的安心程度判断对方是否安心。当你觉得“我们已经很好了”，对方可能还在寻找更多被重视的信号。",word:"不必改变你独立的生活方式，但记得主动让对方知道：你不是不需要TA，而是不需要用时刻黏在一起来证明爱。"},
+"LHL":{name:"慢热的直球派",quote:"我不是不敢爱，只是不想把真心交给还不确定的人。",tags:["谨慎","坦诚","深度亲密"],base:"你可能是恋爱中很容易被误解的一种人。刚认识的时候，你会观察、会犹豫，也不愿意太早暴露心意。你不是没有心动，而是希望先了解一个人究竟值不值得靠近。但只要真正确认了关系，你反而能变得直接、坦诚，甚至比很多人想象得更热烈。你愿意表达想念，愿意让对方进入生活，也希望彼此拥有真实而深入的连接。",contra:"你对感情的态度可能同时存在两种看似相反的状态：还没确定时，你怕自己太主动；真正确定后，你又会觉得爱就应该好好表达。",pit:"你期待别人理解你的谨慎，却可能没有意识到，对方也在等一个信号。有时候你以为自己是在认真观察，但在对方眼里，你可能只是没有那么喜欢。",word:"你不需要逼自己很快爱上谁。但当一个人让你愿意认真了解时，适当地表达好感，并不等于失去保护自己的能力。"},
+"LHH":{name:"留白坦诚派",quote:"我需要时间走近你，但不会让爱成为彼此的束缚。",tags:["慢热","直率","自主"],base:"你对关系的开始往往比较谨慎。你需要通过相处确认自己真正的感受，也不会因为有人喜欢你，就立刻投入一段关系。可一旦确定心意，你并不排斥直接表达。你可以认真告诉对方自己有多喜欢TA，同时也希望彼此都保有原来的生活。",contra:"开始的时候，你需要时间建立信任。确定之后，你又不喜欢过度依赖和过于密集的相处。有些人会误以为你始终在保持距离，但实际上，你只是把爱和自由看作两件可以同时拥有的东西。",pit:"你可能认为“我已经告诉你我爱你了”，就足以解释之后的独处需求。但另一半未必天然理解你的相处节奏。",word:"说出爱意，也说清楚自己的边界。让对方知道什么时候能靠近你，比单纯要求理解更有用。"},
+"LLL":{name:"细水守护派",quote:"我不一定说得最多，但会把喜欢放进许多细小的日子里。",tags:["细腻","陪伴","持续投入"],base:"你很少一开始就把全部心意展示出来。你需要时间观察，也需要时间让自己真正信任一个人。而且即使在确定关系之后，你也不一定习惯频繁说爱。你更喜欢通过陪伴、记住细节，以及平常一点一滴的行动来表达在乎。你想要的感情不是短暂的热闹，而是一种能够逐渐融入彼此生活的亲密。",contra:"你很希望有人能够真正走进你的世界，却又不一定擅长主动邀请。你可能觉得自己已经付出了很多，但对方未必知道这些行动背后究竟藏着多少感情。",pit:"你容易期待别人从细节里读懂你的心。可是对方没看懂，并不必然代表不在乎。如果一直不表达，久而久之容易积累只有自己知道的委屈。",word:"你不需要变成特别会说情话的人。只要偶尔说一句“其实我真的很在乎这件事”，就能让你的付出更容易被理解。"},
+"LLH":{name:"安静自洽派",quote:"我的爱不一定热闹，但会以自己的方式认真存在。",tags:["独立","慎重","稳定投入"],base:"你不喜欢仓促地进入关系，也不认为爱情必须有很多外在表现。遇到心动的人，你可能先观察一段时间。在一起之后，你更习惯用行动而不是语言表达情感，同时希望保留自己的生活节奏。你欣赏的感情，是两个人能互相支持，却不必时时刻刻绑在一起。",contra:"你可能比别人以为的更加在乎一段感情，但你表达在乎的方式很安静。你自己觉得感情很确定，对方却可能因为很少听到表白、很少得到主动邀约，而不能确定自己的位置。",pit:"你可能太习惯独自处理情绪和生活。即使需要关心，也不一定会主动开口。时间长了，对方可能不知道自己应该怎样参与你的世界。",word:"保持独立的同时，也可以让对方有机会照顾你。愿意接受亲密，不意味着失去自己的边界。"}
+};
+const S_TEXT={
+hi:{label:"更需要明确回应",body:"<b>你在感情里，需要的不只是被爱，还有能够感受到爱。</b>你可能可以理解对方忙碌、独处，也愿意给予信任。但当重要的感情信息长期缺少回应时，你容易开始猜测彼此是不是还在同一个方向。你真正需要的未必是频繁联系，而是一些可靠、清晰的确认。",tip:"建议：尝试具体表达自己的需求，例如“最近我们联系变少，我希望每周能安排一点固定相处时间”，而不是用反复试探验证对方。"},
+mid:{label:"确定感与自然相处之间",body:"<b>你希望感情既有确定感，也有自然相处的余地。</b>你不需要时时刻刻确认爱，但遇到重要的变化或误会时，仍然希望得到清楚的解释。",tip:"建议：找到哪些事情值得认真确认、哪些事情可以顺其自然，比给自己贴上“黏人”或“独立”的标签更有帮助。"},
+lo:{label:"从长期相处里判断感情",body:"<b>你更习惯从长期相处里判断感情，而不是从每一次回应里寻找答案。</b>你不太需要对方经常证明在乎，只要两个人关系稳定、有基本信任，就能比较自然地处理短暂的分离或忙碌。但你也可能低估另一半对确认和安抚的需要。",tip:"建议：即使你自己不需要频繁表达，也不意味着对方不会因此得到安慰。"}
+};
+const C_TEXT={
+hi:{label:"倾向及时沟通",body:"<b>你更不喜欢的，是问题一直悬在那里。</b>当关系出现误会，你希望尽早交换想法。你的优势是愿意面对问题，但需要注意：对方可能需要先恢复情绪，才能进行有效的沟通。",tip:"建议：可以先确认“我们什么时候继续聊”，而不是要求所有问题必须立刻解决。"},
+mid:{label:"两种沟通节奏比较均衡",body:"<b>你会根据问题的严重程度，以及双方当时的状态调整沟通节奏。</b>有些事情你希望立刻解释，有些事情则愿意等到双方都准备好。",tip:"建议：灵活是一种优势，但也需要和对方约定好暂停之后如何重新开启讨论。"},
+lo:{label:"倾向整理后沟通",body:"<b>你需要先理解自己的感受，再把它交给对方。</b>你不一定是在逃避，而是希望避免情绪化表达。但如果没有说明何时重新沟通，暂时的冷静也可能被对方理解成冷处理。",tip:"建议：试着说：“我需要一点时间整理，明天我们再认真谈。”既照顾自己，也让对方安心。"}
 };
 
 let idx=0; const answers=[];
@@ -127,54 +169,77 @@ function renderQ(){
   const cur=QUESTIONS[idx];
   $("bar").style.width=(idx/QUESTIONS.length*100)+"%";
   $("qcount").textContent="第 "+(idx+1)+" / "+QUESTIONS.length+" 题";
+  $("qtitle").textContent=cur.t;
   $("qtext").textContent=cur.q;
+  $("qa").textContent=cur.a;
+  $("qb").textContent=cur.b;
   const box=$("opts"); box.innerHTML="";
-  cur.o.forEach(([txt,t],oi)=>{
+  SCALE.forEach(([txt,v],oi)=>{
     const b=document.createElement("button"); b.className="opt"; b.textContent=txt; b.style.animationDelay=(oi*0.05)+"s";
-    if(answers[idx]===t) b.classList.add("picked");
-    b.onclick=()=>{answers[idx]=t; b.classList.add("picked"); setTimeout(()=>{ idx++; if(idx<QUESTIONS.length){renderQ();} else {showResult();} },180);};
+    if(answers[idx]===v) b.classList.add("picked");
+    b.onclick=()=>{answers[idx]=v; b.classList.add("picked"); setTimeout(()=>{ idx++; if(idx<QUESTIONS.length){renderQ();} else {showResult();} },180);};
     box.appendChild(b);
   });
   $("btnBack").style.visibility = idx===0 ? "hidden":"visible";
 }
-function compute(){
-  const score={"直":0,"细":0,"慢":0,"理":0,"自":0,"守":0};
-  answers.forEach(t=>{ if(t) score[t]++; });
-  const max=Math.max(...Object.values(score));
-  const tied=Object.keys(score).filter(k=>score[k]===max);
-  let main=tied[0];
-  if(tied.length>1 && tied.includes(answers[11])) main=answers[11];
-  const sub=tied.find(k=>k!==main) || Object.keys(score).sort((a,b)=>score[b]-score[a])[1];
-  return {main,sub,score};
+function dimScores(){
+  const sum={}, cnt={};
+  QUESTIONS.forEach((q,i)=>{ const v=answers[i]||0; sum[q.d]=(sum[q.d]||0)+v; cnt[q.d]=(cnt[q.d]||0)+1; });
+  const pct={};
+  for(const d in sum){ pct[d]=Math.round((sum[d]+3*cnt[d])/(6*cnt[d])*100); }
+  return pct;
 }
-
-
-let lastMain=null,lastSub=null;
+function typeKey(p,e,i){ return (p>=50?"H":"L")+(e>=50?"H":"L")+(i>=50?"H":"L"); }
+function level(v){ return v>=60?"hi":(v<=40?"lo":"mid"); }
+function compute(){
+  const pct=dimScores();
+  const key=typeKey(pct.P,pct.E,pct.I);
+  let subName=null, nearDim=null;
+  const near=["P","E","I"].filter(d=>pct[d]>=44&&pct[d]<=56);
+  if(near.length){
+    nearDim=near.sort((a,b)=>Math.abs(pct[a]-50)-Math.abs(pct[b]-50))[0];
+    const flipped={P:pct.P,E:pct.E,I:pct.I}; flipped[nearDim]=flipped[nearDim]>=50?49:51;
+    subName=RESULTS[typeKey(flipped.P,flipped.E,flipped.I)].name;
+  }
+  return {pct,key,subName,nearDim,sLvl:level(pct.S),cLvl:level(pct.C)};
+}
+let lastCard=null;
 function showResult(){
-  const {main,sub}=compute(); lastMain=main; lastSub=sub;
-  const r=RESULTS[main];
+  const c=compute();
+  const r=RESULTS[c.key];
+  lastCard={r,sLabel:S_TEXT[c.sLvl].label,cLabel:C_TEXT[c.cLvl].label,subName:c.subName};
   $("rname").textContent=r.name;
   $("rquote").textContent=r.quote;
-  $("rsub").textContent="副型："+RESULTS[sub].name+" —— 你身上还带着它的影子。";
+  $("rsub").textContent = c.subName ? ("你在「"+DIMS[c.nearDim].name+"」上没有明显偏向（"+c.pct[c.nearDim]+" 分），也可能表现出「"+c.subName+"」的一面。") : "";
+  $("rsub").style.display = c.subName ? "" : "none";
   $("rtags").innerHTML=r.tags.map(t=>"<span>"+t+"</span>").join("");
-  $("rbase").textContent=r.base; $("rlove").textContent=r.love; $("rgood").textContent=r.good;
-  $("rpit").textContent=r.pit; $("rmatch").textContent=r.match; $("rword").textContent=r.word;
+  $("rdims").innerHTML=["P","E","I","S","C"].map(d=>{
+    const v=c.pct[d], meta=DIMS[d];
+    return '<div class="dimrow"><div class="dl">'+meta.name+'</div><div class="dt"><i style="width:'+v+'%"></i></div><div class="dv">'+v+' · '+(v>=50?meta.hi:meta.lo)+'</div></div>';
+  }).join("");
+  $("rbase").textContent=r.base;
+  $("rcontra").textContent=r.contra;
+  $("rsec").innerHTML=S_TEXT[c.sLvl].body+"<br>"+S_TEXT[c.sLvl].tip;
+  $("rconf").innerHTML=C_TEXT[c.cLvl].body+"<br>"+C_TEXT[c.cLvl].tip;
+  $("rpit").textContent=r.pit;
+  $("rword").textContent=r.word;
   show("screen-result");
 }
 function wrap(ctx,text,x,y,maxW,lh){let line="",yy=y;for(const ch of text){if(ctx.measureText(line+ch).width>maxW&&line){ctx.fillText(line,x,yy);line=ch;yy+=lh;}else{line+=ch;}}ctx.fillText(line,x,yy);return yy;}
 function makeCard(){
-  const r=RESULTS[lastMain]; const cv=$("cv"); const ctx=cv.getContext("2d");
+  const r=lastCard.r; const cv=$("cv"); const ctx=cv.getContext("2d");
   const g=ctx.createLinearGradient(0,0,0,1440); g.addColorStop(0,"#fff8f2"); g.addColorStop(0.55,"#ffe9ef"); g.addColorStop(1,"#ffd3df");
   ctx.fillStyle=g; ctx.fillRect(0,0,1080,1440);
   ctx.fillStyle="#e8436b"; ctx.beginPath(); ctx.arc(880,190,260,0,7); ctx.globalAlpha=.14; ctx.fill(); ctx.beginPath(); ctx.arc(140,1270,210,0,7); ctx.globalAlpha=.10; ctx.fill(); ctx.globalAlpha=1;
   ctx.fillStyle="#d6336c"; ctx.font="600 40px sans-serif"; ctx.fillText("💌 你在恋爱里是哪种人",90,190);
-  ctx.fillStyle="#8a6d74"; ctx.font="34px sans-serif"; ctx.fillText("12 道题 · 趣味测试结果卡",90,250);
+  ctx.fillStyle="#8a6d74"; ctx.font="34px sans-serif"; ctx.fillText("16 道题 · 趣味测试结果卡",90,250);
   const ng=ctx.createLinearGradient(90,0,990,0); ng.addColorStop(0,"#f0567a"); ng.addColorStop(1,"#d6336c"); ctx.fillStyle=ng; ctx.font="bold 118px sans-serif"; wrap(ctx,r.name,90,470,900,135);
   ctx.fillStyle="#55414a"; ctx.font="44px sans-serif"; wrap(ctx,"“"+r.quote+"”",90,640,880,64);
   ctx.font="600 38px sans-serif"; ctx.fillStyle="#d6336c"; ctx.fillText(r.tags.map(t=>"# "+t).join("   "),90,860);
   ctx.fillStyle="#55414a"; ctx.font="38px sans-serif"; wrap(ctx,r.word,90,980,880,58);
   ctx.fillStyle="#b59aa1"; ctx.font="30px sans-serif";
-  ctx.fillText("副型："+RESULTS[lastSub].name,90,1240);
+  ctx.fillText("安全感："+lastCard.sLabel+" · 冲突时："+lastCard.cLabel,90,1200);
+  if(lastCard.subName) ctx.fillText("也可能有「"+lastCard.subName+"」的一面",90,1255);
   ctx.fillText("趣味娱乐测试 · 非专业心理测评 · 仅供自我探索参考",90,1330);
   $("cardImg").src=cv.toDataURL("image/png");
   $("cardModal").classList.remove("hidden");
