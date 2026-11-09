@@ -54,31 +54,50 @@ h1{font-size:33px;line-height:1.35;margin-bottom:14px;letter-spacing:.5px}
 .dimrow .dt{flex:1;height:9px;background:#ffe3ea;border-radius:99px;overflow:hidden}
 .dimrow .dt i{display:block;height:100%;background:linear-gradient(90deg,#ff8fab,#e8436b);border-radius:99px}
 .dimrow .dv{flex:none;width:118px;font-size:12.5px;color:#b0838e;text-align:right}
-.modal{position:fixed;inset:0;background:rgba(40,15,22,.72);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;z-index:9}
-.modal img{width:min(88vw,360px);border-radius:20px;box-shadow:0 16px 50px rgba(0,0,0,.35)}
+.modal{position:fixed;inset:0;background:rgba(40,15,22,.72);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;overflow-y:auto;padding:58px 20px 24px;z-index:9}
+.modal img{width:min(78vw,340px);max-height:62vh;object-fit:contain;border-radius:20px;box-shadow:0 16px 50px rgba(0,0,0,.35)}
 .modal p{color:#ffd9e1;font-size:13.5px;margin-top:14px}
 .modal .x{position:absolute;top:18px;right:22px;color:#fff;font-size:28px;background:none;border:none;cursor:pointer}
 .modal.hidden{display:none}
+
+/* Accessibility and responsive polish */
+:root{color-scheme:light}
+body{padding-top:max(26px,env(safe-area-inset-top));padding-bottom:max(44px,env(safe-area-inset-bottom))}
+.sub{color:#684c54}
+.disc{color:#795b64}
+.qcount,.qask{color:#80515f}
+.rsub,.dimrow .dv{color:#76545e}
+.tags span,.meta span{color:#a52b4e}
+.btn:focus-visible,.opt:focus-visible,.back:focus-visible,.modal button:focus-visible{outline:3px solid #7b2441;outline-offset:3px}
+.opt:disabled{cursor:wait;opacity:.78}
+.dim-note{font-size:12px;line-height:1.6;color:#76545e;margin:-2px 0 12px}
+.share-title{color:#fff;font-size:16px;margin:0 0 10px;text-align:center}
+.share-actions{width:min(88vw,360px);display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.share-actions .btn{font-size:14px;letter-spacing:0;padding:12px 8px}
+.modal #shareHint{margin-top:10px;text-align:center}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+@media(max-width:380px){.card{padding:28px 19px 24px;border-radius:23px}.qtext{font-size:17px}.abcard p{font-size:14px}.dimrow .dl{width:74px;font-size:12px}.dimrow .dv{width:106px;font-size:11.5px}}
+
 </style>
 </head>
 <body>
-<div class="wrap">
+<main class="wrap">
 
   <div class="card" id="screen-start">
     <div class="hero">💌</div>
     <span class="badge">趣味测试 · 16 道题</span>
     <h1>你在恋爱里，<br>是<span class="grad">哪种人</span>？</h1>
-    <p class="sub">有些人一开始热烈，有些人要等很久才敢认真。16 道题，每题两种反应，没有对错，选更像你的那一边和程度，测出你的恋爱主型、安全感来源和冲突沟通方式。</p>
+    <p class="sub">有些人一开始热烈，有些人要等很久才敢认真。16 道题，每题两种反应，没有对错，选更像你的那一边和程度，帮你观察自己的恋爱主型、安全感来源和冲突沟通方式。</p>
     <div class="meta"><span>⏱ 约 3 分钟</span><span>💌 8 种主型</span><span>📸 结果可截图分享</span></div>
     <button class="btn" id="btnStart">开始测试</button>
     <p class="disc">按照你真实的反应作答，而不是你觉得“应该”怎么做。<br>本测试为趣味娱乐，非专业心理测评，仅供自我探索参考。</p>
   </div>
 
   <div class="card hidden" id="screen-quiz">
-    <div class="progress"><i id="bar" style="width:0%"></i></div>
-    <div class="qcount" id="qcount"></div>
+    <div class="progress" role="progressbar" aria-label="测试进度" aria-valuemin="0" aria-valuemax="16" aria-valuenow="0"><i id="bar" style="width:0%"></i></div>
+    <div class="qcount" id="qcount" aria-live="polite"></div>
     <div class="qtitle" id="qtitle"></div>
-    <div class="qtext" id="qtext"></div>
+    <div class="qtext" id="qtext" tabindex="-1" aria-live="polite"></div>
     <div class="abcard a"><div class="ab">A</div><p id="qa"></p></div>
     <div class="abcard b"><div class="ab">B</div><p id="qb"></p></div>
     <div class="qask">哪一边更像你？</div>
@@ -92,7 +111,7 @@ h1{font-size:33px;line-height:1.35;margin-bottom:14px;letter-spacing:.5px}
     <p class="rquote" id="rquote"></p>
     <p class="rsub" id="rsub"></p>
     <div class="tags" id="rtags"></div>
-    <div class="sec"><h3>你的恋爱倾向图</h3><div class="dims" id="rdims"></div></div>
+    <div class="sec"><h3>你的恋爱倾向图</h3><p class="dim-note">分数表示本次作答的方向，不是准确率或概率；接近中间表示两边都有。</p><div class="dims" id="rdims"></div></div>
     <div class="sec"><h3>你的恋爱底色</h3><p id="rbase"></p></div>
     <div class="sec"><h3>你最真实的矛盾点</h3><p id="rcontra"></p></div>
     <div class="sec"><h3>你在关系里的安全感来源</h3><p id="rsec"></p></div>
@@ -104,12 +123,14 @@ h1{font-size:33px;line-height:1.35;margin-bottom:14px;letter-spacing:.5px}
     <p class="disc">本测试为趣味娱乐，非专业心理测评，仅供自我探索参考。</p>
   </div>
 
-</div>
+</main>
 
-<div class="modal hidden" id="cardModal">
-  <button class="x" id="btnCloseCard">×</button>
-  <img id="cardImg" alt="结果卡">
-  <p>长按图片即可保存到相册</p>
+<div class="modal hidden" id="cardModal" role="dialog" aria-modal="true" aria-labelledby="shareTitle">
+  <button class="x" id="btnCloseCard" aria-label="关闭结果卡">×</button>
+  <h2 id="shareTitle" class="share-title">结果卡已生成</h2>
+  <img id="cardImg" alt="你的恋爱测试结果卡">
+  <div class="share-actions"><button class="btn" id="btnDownloadCard">保存图片</button><button class="btn ghost" id="btnShareCard">分享结果</button></div>
+  <p id="shareHint">也可以长按图片保存到相册</p>
 </div>
 <canvas id="cv" width="1080" height="1440" style="display:none"></canvas>
 
@@ -162,12 +183,14 @@ mid:{label:"两种沟通节奏比较均衡",body:"<b>你会根据问题的严重
 lo:{label:"倾向整理后沟通",body:"<b>你需要先理解自己的感受，再把它交给对方。</b>你不一定是在逃避，而是希望避免情绪化表达。但如果没有说明何时重新沟通，暂时的冷静也可能被对方理解成冷处理。",tip:"建议：试着说：“我需要一点时间整理，明天我们再认真谈。”既照顾自己，也让对方安心。"}
 };
 
-let idx=0; const answers=[];
+let idx=0; const answers=[]; let answerLocked=false; let shareReturnFocus=null;
 const $=id=>document.getElementById(id);
 function show(id){["screen-start","screen-quiz","screen-result"].forEach(s=>$(s).classList.toggle("hidden",s!==id));const el=$(id);el.style.animation="none";void el.offsetWidth;el.style.animation="";window.scrollTo(0,0);}
 function renderQ(){
   const cur=QUESTIONS[idx];
-  $("bar").style.width=(idx/QUESTIONS.length*100)+"%";
+  answerLocked=false;
+  $("bar").style.width=((idx+1)/QUESTIONS.length*100)+"%";
+  $("bar").parentElement.setAttribute("aria-valuenow",String(idx+1));
   $("qcount").textContent="第 "+(idx+1)+" / "+QUESTIONS.length+" 题";
   $("qtitle").textContent=cur.t;
   $("qtext").textContent=cur.q;
@@ -177,10 +200,13 @@ function renderQ(){
   SCALE.forEach(([txt,v],oi)=>{
     const b=document.createElement("button"); b.className="opt"; b.textContent=txt; b.style.animationDelay=(oi*0.05)+"s";
     if(answers[idx]===v) b.classList.add("picked");
-    b.onclick=()=>{answers[idx]=v; b.classList.add("picked"); setTimeout(()=>{ idx++; if(idx<QUESTIONS.length){renderQ();} else {showResult();} },180);};
+    b.setAttribute("aria-pressed",String(answers[idx]===v));
+    b.onclick=()=>{if(answerLocked)return; answerLocked=true; box.querySelectorAll("button").forEach(x=>x.disabled=true); answers[idx]=v; b.classList.add("picked"); b.setAttribute("aria-pressed","true"); setTimeout(()=>{ idx++; if(idx<QUESTIONS.length){renderQ();} else {showResult();} },180);};
     box.appendChild(b);
   });
   $("btnBack").style.visibility = idx===0 ? "hidden":"visible";
+  $("btnBack").disabled = idx===0;
+  $("qtext").focus({preventScroll:true});
 }
 function dimScores(){
   const sum={}, cnt={};
@@ -207,7 +233,7 @@ let lastCard=null;
 function showResult(){
   const c=compute();
   const r=RESULTS[c.key];
-  lastCard={r,sLabel:S_TEXT[c.sLvl].label,cLabel:C_TEXT[c.cLvl].label,subName:c.subName};
+  lastCard={r,sLabel:S_TEXT[c.sLvl].label,cLabel:C_TEXT[c.cLvl].label,subName:c.subName,pct:c.pct};
   $("rname").textContent=r.name;
   $("rquote").textContent=r.quote;
   $("rsub").textContent = c.subName ? ("你在「"+DIMS[c.nearDim].name+"」上没有明显偏向（"+c.pct[c.nearDim]+" 分），也可能表现出「"+c.subName+"」的一面。") : "";
@@ -215,7 +241,8 @@ function showResult(){
   $("rtags").innerHTML=r.tags.map(t=>"<span>"+t+"</span>").join("");
   $("rdims").innerHTML=["P","E","I","S","C"].map(d=>{
     const v=c.pct[d], meta=DIMS[d];
-    return '<div class="dimrow"><div class="dl">'+meta.name+'</div><div class="dt"><i style="width:'+v+'%"></i></div><div class="dv">'+v+' · '+(v>=50?meta.hi:meta.lo)+'</div></div>';
+    const direction=(v>=60?meta.hi:(v<=40?meta.lo:"两侧都有"));
+    return '<div class="dimrow"><div class="dl">'+meta.name+'</div><div class="dt"><i style="width:'+v+'%"></i></div><div class="dv">'+v+' · '+direction+'</div></div>';
   }).join("");
   $("rbase").textContent=r.base;
   $("rcontra").textContent=r.contra;
@@ -242,13 +269,40 @@ function makeCard(){
   if(lastCard.subName) ctx.fillText("也可能有「"+lastCard.subName+"」的一面",90,1255);
   ctx.fillText("趣味娱乐测试 · 非专业心理测评 · 仅供自我探索参考",90,1330);
   $("cardImg").src=cv.toDataURL("image/png");
+  shareReturnFocus=document.activeElement;
   $("cardModal").classList.remove("hidden");
+  document.body.style.overflow="hidden";
+  $("btnDownloadCard").focus();
+}
+function closeCard(){
+  $("cardModal").classList.add("hidden"); document.body.style.overflow="";
+  if(shareReturnFocus && shareReturnFocus.focus) shareReturnFocus.focus();
+}
+async function downloadCard(){
+  if(!lastCard)return;
+  const a=document.createElement("a"); a.href=$("cardImg").src; a.download="我的恋爱测试结果.png"; a.click();
+}
+async function shareCard(){
+  if(!lastCard)return;
+  try{
+    const blob=await (await fetch($("cardImg").src)).blob();
+    const file=new File([blob],"我的恋爱测试结果.png",{type:"image/png"});
+    if(navigator.canShare && navigator.canShare({files:[file]})){
+      await navigator.share({title:"我的恋爱测试结果",text:"我测出的恋爱风格是："+lastCard.r.name,files:[file]});
+      return;
+    }
+  }catch(e){ if(e.name==="AbortError")return; }
+  await downloadCard(); $("shareHint").textContent="此浏览器暂不支持直接分享，结果图片已开始下载。";
 }
 $("btnStart").onclick=()=>{idx=0;answers.length=0;show("screen-quiz");renderQ();};
-$("btnBack").onclick=()=>{if(idx>0){idx--;renderQ();}};
+$("btnBack").onclick=()=>{if(idx>0&&!answerLocked){idx--;renderQ();}};
 $("btnAgain").onclick=()=>{idx=0;answers.length=0;show("screen-quiz");renderQ();};
 $("btnCard").onclick=makeCard;
-$("btnCloseCard").onclick=()=>$("cardModal").classList.add("hidden");
+$("btnDownloadCard").onclick=downloadCard;
+$("btnShareCard").onclick=shareCard;
+$("btnCloseCard").onclick=closeCard;
+$("cardModal").addEventListener("click",e=>{if(e.target===$("cardModal"))closeCard();});
+document.addEventListener("keydown",e=>{const modal=$("cardModal");if(modal.classList.contains("hidden"))return;if(e.key==="Escape"){closeCard();return;}if(e.key==="Tab"){const items=[...modal.querySelectorAll("button")];const first=items[0],last=items[items.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}});
 </script>
 </body>
 </html>
